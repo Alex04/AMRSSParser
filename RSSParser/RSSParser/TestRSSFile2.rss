@@ -1,0 +1,36 @@
+<rss version="2.0" xmlns:quirin="http://quirinbank.de/rss" xmlns:i18n="http://apache.org/cocoon/i18n/2.1" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Newsticker</title>
+<description>Hier finden Sie aktuelle Nachrichten aus Wirtschaft, Politik und Börse sowie interessante Medienberichte über die quirin bank, volkswirtschaftliche Analysen und aktuelle Studien.</description>
+<link>http://www.quirinbank.de/news</link>
+<atom:link type="application/rss+xml" rel="self" href="http://www.quirinbank.de/news.rss"/>
+<language>de</language>
+<copyright>© quirin bank AG</copyright>
+    <item>
+        <title>Immobilien im Spiegel der Medien</title>
+        <description><![CDATA[
+            <html><head><title>Immobilien im Spiegel der Medien</title><style type='text/css' media='screen'> body{ font-family: 'OlsenCompPro', 'Trebuchet MS',Tahoma, Geneva, Helvetica, Arial, sans-serif; font-weight: normal;font-size: 11px; color: #6A6A6A; margin: 0 10px 10px 10px; padding: 0; }img{ display: block; float: left; margin: 5px 18px 7px 0px; border: solid white 5px; -webkit-box-shadow: 0px 2px 7px #848484; -moz-box-shadow: 0px 2px 7px #848484; box-shadow: 0px 2px 7px #848484; }imgHolder{float:left;padding-right:10px;padding-bottom:10px;}h1, h2{ color: #B0022F; font-size: 18px; font-family: 'OlsenCompPro', Georgia, Palatino,Century, Times New Roman, Times, serif; border-bottom: 1px dotted#6A6A6A; padding: 15px 0 2px 0; } dl{ float: left; margin: 6px 0 0 0; }dl dt{ margin: 0 4px 0 0; font-weight: bold; clear: both; float: left; }dl dt.fullWidth { width: 100%; } dl dt.distance, dl dd.distance{margin-top: 13px; } dl dd{ margin: 0 5px 0 0; float: none; display:block; } address{ clear: both; float: none; } address{ color:#1F697F; } </style><script type='text/javascript'>function showImageAtURL( img ){if( typeof( img ) == 'string' ){insertImage( img )}else if( Array.isArray( img ) == true ){for( var i = 0; i &lt; img.length; i++ ){insertImage( img[ i ] )}}}function insertImage( imgSrc ){var holder = document.getElementById( 'imgHolder' );holder.innerHTML += '&lt;img src= + imgSrc + /&gt;';}</script></head><body><h1>Immobilien im Spiegel der Medien</h1><img id='imgHolder' /><p>&bdquo;Betongold&ldquo;, Inflationsschutz, g&uuml;nstige Wohnimmobilienkredite, und die Sorge vor Immobilienblasen - auch die deutsche Medienlandschaft besch&auml;ftigt sich intensiv mit den Themen Immobilien, Baugeld, Darlehen und Investments.</p>
+            <h2>FOCUS ONLINE</h2>
+            <h3>Umschuldung und Forward-Darlehen</h3>
+            <p>Die derzeit historisch niedrigen Zinsen f&uuml;r Immobiliendarlehen k&ouml;nnen bald wieder steigen. Deshalb kann es sich f&uuml;r Hausbesitzer lohnen, laufende Kredite jetzt noch umzuschulden oder ein Anschlussdarlehen abzuschlie&szlig;en.<br /><a href="http://www.focus.de/immobilien/finanzieren/tid-27458/umschuldung-und-forward-darlehen-wie-hausbesitzer-das-zinstief-am-besten-nutzen_aid_825806.html" target="blank">Zum Artikel auf focus.de &gt;</a></p>
+            <h2>DIE WELT</h2>
+            <h3>Baugeld zu Schn&auml;ppchen-Konditionen</h3>
+            <p>Nie war es g&uuml;nstiger, ein Eigenheim zu finanzieren. Doch die niedrigen Zinsen allein machen noch lange keine gute Baufinanzierung aus. Individuell die besten Konditionen zu finden, ist eine Kunst f&uuml;r sich. Die besten Angebote haben in der Regel unabh&auml;ngige Vermittler.<br /> <a href="http://www.welt.de/print/die_welt/finanzen/article109512990/Baugeld-zu-Schnaeppchen-Konditionen.html" target="blank">Zum Artikel auf welt.de &gt;</a></p>
+            <h2>FINANCIAL TIMES DEUTSCHLAND</h2>
+            <h3>So teuer wohnt es sich in Deutschland</h3>
+            <p>Wohnimmobilieninvestments sind in Deutschland derzeit beliebt wie seit Jahren nicht mehr. Wegen der g&uuml;nstigen Zinsen sehen sich auch Privatanleger eher in der Lage, die Finanzierung eines Objekts zu stemmen.<br /> <a href="http://www.ftd.de/finanzen/immobilien/:immobilien-so-teuer-wohnt-es-sich-in-deutschland/70095330.html" target="blank">Zum Artikel auf ftd.de &gt;</a></p>
+            <h2>FOCUS MONEY</h2>
+            <h3>Exzellente Platzierung der Baugeld Spezialisten</h3>
+            <p>Focus Money ermittelte erstmals die besten Baufinanzierer anhand eines Fairness-Rankings. Im Gesamturteil unter den Vermittlern schneiden die Baugeld Spezialisten, Partner der quirin bank bei der Baufinanzierungsberatung, mit dem zweiten Platz ab.<br /> <a href="http://www.baugeld-spezialisten.de/exzellente-platzierung-der-baugeld-spezialisten-beim-fairness-ranking-von-focus-money.html" target="blank">Zum Artikel auf baugeld-spezialisten.de &gt;</a></p></body></html>
+        ]]></description>
+        <pubDate>Fri, 30 Nov 2012 13:00:00 +0100</pubDate>
+        <link>https://www.quirinbank.de/news/Medienschau</link>
+        <guid>https://www.quirinbank.de/news/Medienschau</guid>
+        <enclosure type="image/jpeg" url="https://www.quirinbank.de/system/images/669/preview_normal/baufi_medienschau.jpg" length="37424"/>
+        <enclosure type="image/jpeg" url="https://www.quirinbank.de/system/images/669/preview_retina/baufi_medienschau.jpg" length="37424"/>
+        <quirin:rating>0.0</quirin:rating>
+        <quirin:teaser>„Betongold“, Inflationsschutz, günstige Wohnimmobilienkredite, und die Sorge vor Immobilienblasen - auch die deutsche Medienlandschaft beschäftigt sich intensiv mit den Themen Immobilien, Baugeld, Darlehen und Investments. </quirin:teaser>
+        <comments>https://www.quirinbank.de/articles/739/comments</comments>
+    </item>
+</channel>
+</rss>
