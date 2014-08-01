@@ -2,6 +2,7 @@ AMRSSParser
 ===========
 
 AMRSSParser is simple rss parser for iOS. Unlike the MWFeedParser, AMRSSParser does not download the feed so that you can still use your current networking framework like AFNetworking.
+Furthermore the parser will even parse all non standard RSS elements to easily get access to all custom feed properties.
  
 How to use
 ===========
