@@ -37,3 +37,8 @@ AMRSSParser uses ARC
 Contact
 ===========
 http://www.ama-dev.com
+
+License
+===========
+AMRSSParser is licensed under the MIT License.
+
