@@ -28,3 +28,12 @@ Lets say you have finished the download of your feed with AFNetworking and want 
                      failure:onFailure];
 
 ```
+
+
+ARC
+===========
+AMRSSParser uses ARC
+
+Contact
+===========
+http://www.ama-dev.com
