@@ -7,22 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMRSSFeedChannel.h"
 
 @interface AMRSSFeedItem : NSObject
 
 //mandatory
-@property(nonatomic, strong) NSString *title;
-@property(nonatomic, strong) NSString *feedDescription;
-@property(nonatomic, strong) NSString *link;
+@property(nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *feedDescription;
+@property(nonatomic, copy) NSString *link;
 
 //optional
-@property(nonatomic, strong) NSString *author;
-@property(nonatomic, strong) NSString *source;
-@property(nonatomic, strong) NSString *commentsURL;
+@property(nonatomic, copy) NSString *author;
+@property(nonatomic, copy) NSString *source;
+@property(nonatomic, copy) NSString *commentsURL;
 @property(nonatomic, strong) NSDate *pubDate;
-@property(nonatomic, strong) NSString *guid;
-@property(nonatomic, strong) NSString *category;
+@property(nonatomic, copy) NSString *guid;
+@property(nonatomic, copy) NSString *category;
 @property(nonatomic, strong) NSArray *arrayEnclosures;
+@property(nonatomic, strong) AMRSSFeedChannel *channel;
 
 //custom properties
 @property(nonatomic, strong) NSDictionary *dictCustomProperties;

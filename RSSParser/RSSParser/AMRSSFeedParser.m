@@ -9,7 +9,6 @@
 #import "AMRSSFeedParser.h"
 #import "AMRSSFeedChannel.h"
 #import "AMRSSFeedItem.h"
-#import "NSObject+PrintProperties.h"
 #import "AMRSSFeedEnclosureItem.h"
 #import "NSDate+Extensions.h"
 
@@ -26,9 +25,14 @@ typedef enum {
 @property (nonatomic, strong) id currentlyParsingElement;               //channel or item
 @property (nonatomic, strong) NSDictionary *dictCurrentElementAttributes;   //element attributes
 @property (nonatomic, assign) AMParsingElementType parsingElementType;
-@property (nonatomic, strong) NSString *currentElementName;
 @property (nonatomic, strong) NSString *currentCharacters;              //characters are not returned at once
 @property (nonatomic, strong) NSDictionary *dictElementToSelectorMapper;
+@property (nonatomic, strong) NSMutableString *currentPath;
+
+@property (nonatomic, copy) AMARSSFeedParserDidFailWithError errorBlock;
+@property (nonatomic, copy) AMARSSFeedParserDidFinishParsing successBlock;
+
+@property (nonatomic, strong) NSMutableArray *stackParsingElement;
 
 @end
 
@@ -40,12 +44,20 @@ typedef enum {
     
     if(self) {
         self.dictCurrentElementAttributes = [[NSDictionary alloc] init];
+        self.stackParsingElement = [NSMutableArray array];
     }
     
     return self;
 }
 
-- (void) parse:(NSData *) aRSSFeed parseError:(NSError **) aParseError;
+- (void) parse:(NSData *) aRSSFeed onSuccess:(AMARSSFeedParserDidFinishParsing) onSuccessBlock onFailure:(AMARSSFeedParserDidFailWithError) onFailureBlock;
+{
+    self.errorBlock = onFailureBlock;
+    self.successBlock = onSuccessBlock;
+    [self parse:aRSSFeed];
+}
+
+- (void) parse:(NSData *) aRSSFeed;
 {
     [self setup];
     
@@ -58,9 +70,6 @@ typedef enum {
     
     [self.parser parse];
     
-    if(aParseError && [self.parser parserError]) {
-        *aParseError = [self.parser parserError];
-    }
 }
 
 #pragma mark -
@@ -129,6 +138,8 @@ typedef enum {
     self.dictElementToSelectorMapper = [NSDictionary dictionaryWithObjects:arrayHanlderMethods
                                                                    forKeys:arrayKeys];
     
+    self.currentPath = [[NSMutableString alloc] init];
+    
 }
 
 #pragma mark -
@@ -152,14 +163,16 @@ didStartElement:(NSString *)elementName
         self.parsingElementType = AMParsingElementTypeItem;
     }
     
-    //save elementName for later distinction
-    self.currentElementName = elementName;
+    //append element name to path
+    [self.currentPath appendString:[NSString stringWithFormat:@"%@/", elementName]];
     
     //save attributes
     self.dictCurrentElementAttributes = attributeDict;
     
     //init new string for the element text
     self.currentCharacters = @"";
+    
+    [self.stackParsingElement addObject:elementName];
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string;
@@ -172,23 +185,32 @@ didStartElement:(NSString *)elementName
    namespaceURI:(NSString *)namespaceURI
   qualifiedName:(NSString *)qName;
 {
-
+    NSString *endingElement = [self.stackParsingElement lastObject];
+    
     //channel element indicates end of channel
-    if ([elementName isEqualToString:@"channel"]) {
+    if ([endingElement isEqualToString:@"channel"]) {
 
     }
     //item element indicates end of feed item
-    else if([elementName isEqualToString:@"item"]) {
+    else if([endingElement isEqualToString:@"item"]) {
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.channel.items];
         [array addObject:self.currentItem];
+        self.currentItem.channel = self.channel;
         self.channel.items = array;
-    } else {
-     
+    }
+    //we currently handle only item and channel first child paths
+    else if(![self.currentPath hasPrefix:@"rss/channel/image/"]) {
+
         //if its a standard element, we do have a selector to handle it
-        SEL handlerMethod = NSSelectorFromString([self.dictElementToSelectorMapper objectForKey:self.currentElementName]);
+        SEL handlerMethod = NSSelectorFromString([self.dictElementToSelectorMapper objectForKey:[self.stackParsingElement lastObject]]);
         //check if we parsing a standard element
         if(handlerMethod) {
-            [self performSelector:handlerMethod withObject:self.currentCharacters];
+            if([self respondsToSelector:handlerMethod]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [self performSelector:handlerMethod withObject:self.currentCharacters];
+#pragma clang diagnostic pop
+            }
         } else {    //we are parsing an custom element
             [self handleCustomPropertyWithValue:self.currentCharacters];
         }
@@ -196,6 +218,33 @@ didStartElement:(NSString *)elementName
         //not needed anymore, current element finished
         self.currentCharacters = nil;
         
+    }
+    
+    //remove from path
+    self.currentPath = [[self.currentPath stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@/", endingElement] withString:@""] mutableCopy];
+    
+    //remove from stack
+    [self.stackParsingElement removeLastObject];
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser;
+{
+    if(self.successBlock) {
+        self.successBlock(self.channel);
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError;
+{
+    if(self.errorBlock) {
+        self.errorBlock(parseError);
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError;
+{
+    if(self.errorBlock) {
+        self.errorBlock(validationError);
     }
 }
 
@@ -216,7 +265,7 @@ didStartElement:(NSString *)elementName
         {
             NSMutableDictionary *dictProperties = [[NSMutableDictionary alloc]
                                                    initWithDictionary:self.currentItem.dictCustomProperties];
-            [dictProperties setObject:aValue forKey:self.currentElementName];
+            [dictProperties setObject:aValue forKey:[self.stackParsingElement lastObject]];
             self.currentItem.dictCustomProperties = dictProperties;
         }
             break;
@@ -276,7 +325,7 @@ didStartElement:(NSString *)elementName
 - (void) handlePubDateCharacters:(NSString *) aPubDate;
 {
     //parse the date to proper format
-    NSDate *date = [NSDate dateFromRFC822String:aPubDate];
+    NSDate *date = [NSDate dateFromRFC1123:aPubDate];
     
     //check which rss element we are at
     switch (self.parsingElementType) {
@@ -312,7 +361,7 @@ didStartElement:(NSString *)elementName
 - (void) handleLastBuildDateCharacters:(NSString *) aLastBuildDate;
 {
     //parse date to proper format
-    NSDate *lastBuildDate = [NSDate dateFromRFC822String:aLastBuildDate];
+    NSDate *lastBuildDate = [NSDate dateFromRFC1123:aLastBuildDate];
     
     //check which rss element we are at
     switch (self.parsingElementType) {

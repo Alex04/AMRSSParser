@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class AMRSSFeedChannel;
+
+typedef void (^AMARSSFeedParserDidFinishParsing) (AMRSSFeedChannel *channel);
+
+typedef void (^AMARSSFeedParserDidFailWithError) (NSError *error);
+
 @interface AMRSSFeedParser : NSObject <NSXMLParserDelegate>
 
-- (void) parse:(NSData *) aRSSFeed parseError:(NSError **) aParseError;
+
+- (void) parse:(NSData *) aRSSFeed onSuccess:(AMARSSFeedParserDidFinishParsing) onSuccessBlock onFailure:(AMARSSFeedParserDidFailWithError) onFailureBlock;
 
 @end
