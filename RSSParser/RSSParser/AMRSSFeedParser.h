@@ -17,6 +17,8 @@ typedef void (^AMARSSFeedParserDidFailWithError) (NSError *error);
 @interface AMRSSFeedParser : NSObject <NSXMLParserDelegate>
 
 
-- (void) parse:(NSData *) aRSSFeed onSuccess:(AMARSSFeedParserDidFinishParsing) onSuccessBlock onFailure:(AMARSSFeedParserDidFailWithError) onFailureBlock;
+- (void) parse:(NSData *) aRSSFeed
+     onSuccess:(AMARSSFeedParserDidFinishParsing) onSuccessBlock
+     onFailure:(AMARSSFeedParserDidFailWithError) onFailureBlock;
 
 @end

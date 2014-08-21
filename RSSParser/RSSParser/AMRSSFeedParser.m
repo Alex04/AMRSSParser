@@ -325,7 +325,7 @@ didStartElement:(NSString *)elementName
 - (void) handlePubDateCharacters:(NSString *) aPubDate;
 {
     //parse the date to proper format
-    NSDate *date = [NSDate dateFromRFC1123:aPubDate];
+    NSDate *date = [NSDate dateFromRFC822String:aPubDate];
     
     //check which rss element we are at
     switch (self.parsingElementType) {
@@ -361,7 +361,7 @@ didStartElement:(NSString *)elementName
 - (void) handleLastBuildDateCharacters:(NSString *) aLastBuildDate;
 {
     //parse date to proper format
-    NSDate *lastBuildDate = [NSDate dateFromRFC1123:aLastBuildDate];
+    NSDate *lastBuildDate = [NSDate dateFromRFC822String:aLastBuildDate];
     
     //check which rss element we are at
     switch (self.parsingElementType) {

@@ -10,8 +10,9 @@
 
 @interface NSDate (Extensions)
 
-//According to the rss specifications all dates are in rfc822 format
+//According to the rss specifications all dates are in rfc822 format, but we can use others
 + (NSDate *)dateFromRFC822String:(NSString *)dateString;
 + (NSDate *)dateFromRFC3339String:(NSString *)dateString;
++ (NSDate *)dateFromRFC1123:(NSString*)value_;
 
 @end

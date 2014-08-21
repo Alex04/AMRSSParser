@@ -35,8 +35,15 @@
 
     
     AMRSSFeedParser *parser = [[AMRSSFeedParser alloc] init];
-    NSError *error = nil;
-    [parser parse:data parseError:&error];
+
+    [parser parse:data onSuccess:^(AMRSSFeedChannel *channel) {
+        NSLog(@"Finished parsing");
+        
+        NSLog(@"%@", [channel debugDescription]);
+        
+    } onFailure:^(NSError *error) {
+        NSLog(@"Failed parsing: %@", [error localizedDescription]);
+    }];
     
     return YES;
 }

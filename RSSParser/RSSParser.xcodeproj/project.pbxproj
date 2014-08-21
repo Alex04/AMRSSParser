@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FA650A661676627E00CCC3AA /* TestRSSFile2.rss in Resources */ = {isa = PBXBuildFile; fileRef = FA650A651676627D00CCC3AA /* TestRSSFile2.rss */; };
-		FA650AAD1677A37700CCC3AA /* NSObject+PrintProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FA650AAC1677A37700CCC3AA /* NSObject+PrintProperties.m */; };
 		FA650AB11677D24F00CCC3AA /* NSDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = FA650AB01677D24E00CCC3AA /* NSDate+Extensions.m */; };
 		FA650AB31677D4B800CCC3AA /* TestRSSFile3.rss in Resources */ = {isa = PBXBuildFile; fileRef = FA650AB21677D4B800CCC3AA /* TestRSSFile3.rss */; };
 		FA75AF0D162F058E0047365B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA75AF0C162F058E0047365B /* UIKit.framework */; };
@@ -32,8 +31,6 @@
 
 /* Begin PBXFileReference section */
 		FA650A651676627D00CCC3AA /* TestRSSFile2.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestRSSFile2.rss; sourceTree = "<group>"; };
-		FA650AAB1677A37700CCC3AA /* NSObject+PrintProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PrintProperties.h"; sourceTree = "<group>"; };
-		FA650AAC1677A37700CCC3AA /* NSObject+PrintProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PrintProperties.m"; sourceTree = "<group>"; };
 		FA650AAF1677D24E00CCC3AA /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extensions.h"; sourceTree = "<group>"; };
 		FA650AB01677D24E00CCC3AA /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extensions.m"; sourceTree = "<group>"; };
 		FA650AB21677D4B800CCC3AA /* TestRSSFile3.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestRSSFile3.rss; sourceTree = "<group>"; };
@@ -138,8 +135,6 @@
 		FA75AF2F162F059B0047365B /* RSSParser */ = {
 			isa = PBXGroup;
 			children = (
-				FA650AAB1677A37700CCC3AA /* NSObject+PrintProperties.h */,
-				FA650AAC1677A37700CCC3AA /* NSObject+PrintProperties.m */,
 				FA650AAF1677D24E00CCC3AA /* NSDate+Extensions.h */,
 				FA650AB01677D24E00CCC3AA /* NSDate+Extensions.m */,
 				FA75AF3C162F08100047365B /* libxml2.2.dylib */,
@@ -235,7 +230,6 @@
 				FA75AF35162F05F60047365B /* AMRSSFeedItem.m in Sources */,
 				FA75AF38162F07810047365B /* AMRSSFeedEnclosureItem.m in Sources */,
 				FA75AF3B162F07E60047365B /* AMRSSFeedParser.m in Sources */,
-				FA650AAD1677A37700CCC3AA /* NSObject+PrintProperties.m in Sources */,
 				FA650AB11677D24F00CCC3AA /* NSDate+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
