@@ -2,6 +2,7 @@ AMRSSParser
 ===========
 
 AMRSSParser is simple rss parser for iOS. Unlike the MWFeedParser, AMRSSParser does not download the feed so that you can still use your current networking framework like AFNetworking.
+Furthermore the parser will even parse all non standard RSS elements to easily get access to all custom feed properties.
  
 How to use
 ===========
@@ -12,18 +13,33 @@ Lets say you have finished the download of your feed with AFNetworking and want 
 ```
 //...
 [self.requestManager GET:aPath
-                                      parameters:self.requestParameters
-                                         success:^(AFHTTPRequestOperation *operation, NSData *responseData) {
-    // Initiate our parser
-                       AMRSSFeedParser *parser = [[AMRSSFeedParser alloc] init];
-                       [parser parse:responseData onSuccess:^(AMRSSFeedChannel *channel) {
-                           
-                       } onFailure:^(NSError *error) {
-                           if(onFailureBlock) {
-                               onFailureBlock(error);
-                           }
-                       }];
-                                         failure:onDownloadFailure];
-onSuccess:
+                  parameters:self.requestParameters
+                     success:^(AFHTTPRequestOperation *operation, NSData *responseData) {
+                         // Initiate our parser
+                         AMRSSFeedParser *parser = [[AMRSSFeedParser alloc] init];
+                         [parser parse:responseData onSuccess:^(AMRSSFeedChannel *channel) {
+                             //Do anything you want with the channel and it's containing objects
+                         } onFailure:^(NSError *error) {
+                             //Okay, there was an error parsing the data - call the given error block onFailure if available
+                             if(onFailure) {
+                                 onFailure(nil, error);
+                             }
+                         }];
+                     }
+                     failure:onFailure];
 
 ```
+
+
+ARC
+===========
+AMRSSParser uses ARC
+
+Contact
+===========
+http://www.ama-dev.com
+
+License
+===========
+AMRSSParser is licensed under the MIT License.
+
